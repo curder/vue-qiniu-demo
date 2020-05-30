@@ -35,8 +35,7 @@
 
           <el-button type="primary"
                      class="w-full mb-6"
-                     @click.native.prevent="handleLogin">
-            6登录
+                     @click.native.prevent="handleLogin">登录
           </el-button>
 
         </el-form>
@@ -45,19 +44,31 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   data() {
     return {
       loginForm: {
-        name: '',
-        password: '',
+        name: 'curder',
+        password: 'aaaaaa',
       },
     };
   },
 
   methods: {
-    handleLogin() {
+    ...mapActions('userModule', { userLogin: 'login' }),
 
+    handleLogin() {
+      this.userLogin(this.loginForm)
+        // eslint-disable-next-line no-unused-vars
+        .then((data) => {
+          // 跳转到首页
+          this.$router.push({ name: 'dashboard' });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

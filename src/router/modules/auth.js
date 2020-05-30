@@ -13,12 +13,13 @@ const authRouters = [
     children: [
       {
         path: 'dashboard',
-        component: () => import('@/views/dashboard/index.vue'),
-        name: 'Dashboard',
+        component: () => import(/* webpackChunkName: "dashboard" */'@/views/dashboard/index.vue'),
+        name: 'dashboard',
         meta: {
           title: 'Dashboard',
           icon: 'dashboard',
           affix: true,
+          auth: true,
         },
       },
     ],
